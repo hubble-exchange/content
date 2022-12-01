@@ -1,0 +1,13 @@
+
+/* Mondella Font */
+@font-face {
+  font-family: Mondella;
+  font-display: swap;
+  font-style: normal;
+  font-weight: 100;
+  src: url('./Mondella.eot');
+  src: local(''), url('./Mondella.eot?#iefix') format('embedded-opentype'),
+    url('./Mondella.svg#Mondella') format('svg'),
+    url('./Mondella.ttf') format('truetype'), url('./Mondella.woff') format('woff'),
+    url('./Mondella.woff2') format('woff2');
+}

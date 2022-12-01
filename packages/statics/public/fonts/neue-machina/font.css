@@ -1,0 +1,57 @@
+
+/* Neue Machina */
+@font-face {
+  font-family: 'Neue Machina';
+  font-display: swap;
+  font-style: normal;
+  font-weight: 200;
+  src: local(''), /* Modern Browsers */ url('./NeueMachina-Ultralight.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Neue Machina';
+  font-display: swap;
+  font-style: normal;
+  font-weight: 300;
+  src: local(''), /* Modern Browsers */ url('./NeueMachina-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Neue Machina';
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+  src: local(''), /* Modern Browsers */ url('./NeueMachina-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Neue Machina';
+  font-display: swap;
+  font-style: normal;
+  font-weight: 500;
+  src: local(''), /* Modern Browsers */ url('./NeueMachina-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Neue Machina';
+  font-display: swap;
+  font-style: normal;
+  font-weight: 700;
+  src: local(''), /* Modern Browsers */ url('./NeueMachina-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Neue Machina';
+  font-display: swap;
+  font-style: normal;
+  font-weight: 800;
+  src: local(''), /* Modern Browsers */ url('./NeueMachina-Ultrabold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Neue Machina';
+  font-display: swap;
+  font-style: normal;
+  font-weight: 900;
+  src: local(''), /* Modern Browsers */ url('./NeueMachina-Black.ttf') format('truetype');
+}

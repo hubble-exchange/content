@@ -1,0 +1,8 @@
+/* Gratelos Font */
+@font-face {
+  font-family: Gratelos;
+  font-display: swap;
+  font-style: normal;
+  font-weight: 600;
+  src: url('./GratelosDisplay.ttf') format('truetype'), url('./GratelosDisplay.otf') format('opentype')
+}
