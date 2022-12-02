@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
-import { RadioItem } from '../types'
+import type { RadioItem } from '../types'
 
 const prop = defineProps({
   classes: { default: () => [], type: Array as () => string[] },
@@ -14,12 +14,13 @@ const selected = ref<number | string | null>(prop.value || null)
 
 watch(
   () => prop.value,
-  () => (selected.value = prop.value)
+  () => (selected.value = prop.value),
 )
 const select = (val: string | number) => {
-  if (!prop.required && selected.value == val) {
+  if (!prop.required && String(selected.value) === String(val))
     selected.value = null
-  } else selected.value = val
+
+  else selected.value = val
   emit('change', selected.value)
 }
 </script>

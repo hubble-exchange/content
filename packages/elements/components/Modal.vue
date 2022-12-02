@@ -28,7 +28,7 @@ watch(escape, () => escape.value && emit('close'))
               class="fixed inset-0 w-full h-full z-20 bg-originalBlack bg-opacity-10 overflow-y-auto hidden-scrollbar duration-300"
               style="backdrop-filter: blur(10px)"
               @click="emit('close')"
-            ></div>
+            />
           </transition>
           <transition name="centered-appear" appear leave>
             <div
@@ -39,7 +39,7 @@ watch(escape, () => escape.value && emit('close'))
               aria-label="Modal"
             >
               <div class="relative shadow-lg w-full z-20">
-                <slot></slot>
+                <slot />
               </div>
             </div>
           </transition>

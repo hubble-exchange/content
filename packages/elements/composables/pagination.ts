@@ -1,7 +1,6 @@
 import type { Ref } from 'vue'
 import { ref, watchSyncEffect } from 'vue'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const usePagination = <Item>(allItems: Ref<Item[]>, limit: number) => {
   const totalPages = ref<number>(1)
   const page = ref(1)

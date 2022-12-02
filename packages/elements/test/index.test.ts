@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { ref } from 'vue'
-import { useLimitPagination } from "../composables/limitPagination";
-import { usePagination } from "../composables/pagination";
+import { useLimitPagination } from '../composables/limitPagination'
+import { usePagination } from '../composables/pagination'
 
 describe('use pagination composable', () => {
   const list = ref([1, 2, 3, 5, 6, 7, 9])
@@ -67,7 +67,7 @@ describe('use limit pagination composable', () => {
   }
   const { page, gotoPage, fetchPage, visiblePages, hasNext, hasPrev, previous, next } = useLimitPagination(
     fetchNextPage,
-    limit
+    limit,
   )
 
   it('should return first page', async () => {

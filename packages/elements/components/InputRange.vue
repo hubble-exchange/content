@@ -24,7 +24,7 @@ watch(
       input.value = prop.value
       wasValueChanged = true
     }
-  }
+  },
 )
 
 const onChange = () => {
@@ -40,13 +40,15 @@ watchDebounced(input, onChange, { debounce: 700 })
 
 const backgroundSize = computed((): string => {
   const leftSide = ((input.value - prop.min) * 100) / (prop.max - prop.min)
-  if (leftSide < 0) return '0% 100%'
+  if (leftSide < 0)
+    return '0% 100%'
   return `${leftSide}% 100%`
 })
 
 const style = computed(() => {
   const style: { backgroundSize?: string; height?: string } = { backgroundSize: backgroundSize.value }
-  if (prop.height) style.height = `${prop.height}px`
+  if (prop.height)
+    style.height = `${prop.height}px`
   return style
 })
 </script>
@@ -66,7 +68,7 @@ const style = computed(() => {
       :class="{ 'cursor-pointer': !prop.disabled }"
       class="w-full styled-range mt-auto"
       :area-label="label"
-    />
+    >
     <div class="flex ml-4 items-center px-3 justify-between rounded-2.5 border border-common">
       <input
         v-model.number="input"
@@ -76,7 +78,7 @@ const style = computed(() => {
         step="0.01"
         :disabled="prop.disabled"
         class="unstyled-input py-2.5 text-right w-10"
-      />
+      >
       <span class="ml-1">%</span>
     </div>
   </div>

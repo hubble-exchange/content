@@ -10,14 +10,14 @@ const toggle = () => (checked.value = !checked.value)
 watch(checked, () => emit('change', checked.value))
 watch(
   () => prop.value,
-  () => (checked.value = prop.value)
+  () => (checked.value = prop.value),
 )
 </script>
 
 <template>
   <div>
-    <input :id="id" class="tgl tgl-ios" type="checkbox" :checked="checked" />
-    <label class="tgl-btn" @click="toggle()"></label>
+    <input :id="id" class="tgl tgl-ios" type="checkbox" :checked="checked">
+    <label class="tgl-btn" @click="toggle()" />
   </div>
 </template>
 

@@ -8,7 +8,7 @@ export const range = (start: number, stop: number, step = 1): number[] =>
 export const useLimitPagination = (
   fetchData: (page: number, limit: number) => Promise<number>,
   limit = ref(10),
-  visiblePageCount = ref(10)
+  visiblePageCount = ref(10),
 ) => {
   const page = ref(1)
   const totalPages = ref(1)
@@ -46,10 +46,13 @@ export const useLimitPagination = (
 
   const visiblePages = computed(() => {
     const _pages = range(1, totalPages.value)
-    if (totalPages.value <= visiblePageCount.value) return _pages // if less than 10 return all pages
+    if (totalPages.value <= visiblePageCount.value)
+      return _pages // if less than 10 return all pages
     const pages = [..._pages].splice(page.value - 5, 10)
-    if (page.value > 8 && pages.length < 10) return [..._pages].splice(page.value - 5 - (10 - pages.length), 10)
-    if (page.value > 8) return pages
+    if (page.value > 8 && pages.length < 10)
+      return [..._pages].splice(page.value - 5 - (10 - pages.length), 10)
+    if (page.value > 8)
+      return pages
     return [..._pages].splice(0, 10)
   })
 

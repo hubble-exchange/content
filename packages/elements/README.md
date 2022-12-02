@@ -6,7 +6,7 @@ Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introdu
 
 Make sure to install the dependencies:
 
-Install `@ethersproject/bignumber` and `@ethersproject/units` to your project these are used as external packages
+Install `@vueuse/nuxt`, `@ethersproject/bignumber` and `@ethersproject/units` to your project these are used as external packages
 
 ```bash
 # yarn

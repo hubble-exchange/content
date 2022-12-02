@@ -21,12 +21,12 @@ onClickOutside(target, close)
     @mouseleave="props.drop && (show.mouse = false)"
   >
     <div class="w-full h-full dropdown-button cursor-pointer" @click="props.drop && (show.click = !show.click)">
-      <slot :show="show.click || show.mouse"></slot>
+      <slot :show="show.click || show.mouse" />
     </div>
     <Transition name="slide-fade" mode="out-in">
       <slot v-if="show.click || show.mouse" name="content" :close="close">
         <div class="dropdown-items absolute">
-          <div></div>
+          <div />
         </div>
       </slot>
     </Transition>

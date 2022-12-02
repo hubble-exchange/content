@@ -1,15 +1,10 @@
 <script setup lang="ts">
 import { useMagicKeys, watchDebounced } from '@vueuse/core'
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { BigNumber as BN } from '@ethersproject/bignumber'
+import type { BigNumber as BN } from '@ethersproject/bignumber'
 import { formatUnits, parseUnits } from '@ethersproject/units'
 
 type BigNumberish = BN | bigint | string | number
-
-const scale = (amount: string | number | bigint, decimals: BigNumberish = 6): BN => {
-  return parseUnits(amount.toString(), decimals)
-}
-const unScale = (amount: BigNumberish, decimals: BigNumberish = 6): string => formatUnits(amount, decimals)
 
 const prop = defineProps({
   placeholder: { default: '0', type: [String, Number] },
@@ -25,6 +20,10 @@ const prop = defineProps({
   continuesCallbacks: { default: false, type: Boolean },
 })
 const emit = defineEmits<{ (e: 'change', value: string): void }>()
+const scale = (amount: string | number | bigint, decimals: BigNumberish = 6): BN => {
+  return parseUnits(amount.toString(), decimals)
+}
+const unScale = (amount: BigNumberish, decimals: BigNumberish = 6): string => formatUnits(amount, decimals)
 
 const inputElId = computed(() => (Math.random().toString(36) + Date.now().toString(36)).substr(2))
 const inpElement = ref<HTMLInputElement | null>(null)
@@ -49,9 +48,10 @@ watch(
   () => {
     if (input.value !== prop.value) {
       input.value = `${prop.value}`
-      if (!prop.continuesCallbacks) wasValueChanged = true
+      if (!prop.continuesCallbacks)
+        wasValueChanged = true
     }
-  }
+  },
 )
 
 // Restricts input for the given textbox to the given inputFilter function.
@@ -61,41 +61,46 @@ const InputFilters = function (textbox: Element, inputFilter: (value: string) =>
       oldValue: string
       oldSelectionStart: number | null
       oldSelectionEnd: number | null
-    }
+    },
   ) {
     if (inputFilter(this.value)) {
       this.oldValue = this.value
       this.oldSelectionStart = this.selectionStart
       this.oldSelectionEnd = this.selectionEnd
-    } else if (Object.prototype.hasOwnProperty.call(this, 'oldValue')) {
+    }
+    else if (Object.prototype.hasOwnProperty.call(this, 'oldValue')) {
       this.value = this.oldValue
       input.value = this.oldValue
-      if (this.oldSelectionStart !== null && this.oldSelectionEnd !== null) {
+      if (this.oldSelectionStart !== null && this.oldSelectionEnd !== null)
         this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd)
-      }
-    } else {
+    }
+    else {
       this.value = ''
     }
   }
   const events = ['input', 'keydown', 'keyup', 'mousedown', 'mouseup', 'select', 'contextmenu', 'drop', 'focusout']
   if (isAdd) {
-    events.forEach(function (event) {
+    events.forEach((event) => {
       textbox.addEventListener(event, callback)
     })
-  } else {
-    events.forEach(function (event) {
+  }
+  else {
+    events.forEach((event) => {
       textbox.removeEventListener(event, callback)
     })
   }
 }
 
 onMounted(() => {
-  if (inpElement.value === null) return
+  if (inpElement.value === null)
+    return
   // const inputEL = document.getElementById(inputElId)
-  if (prop.focus) inpElement.value.focus()
+  if (prop.focus)
+    inpElement.value.focus()
 
   // Install input filters.
-  if (isInpNumber.value) InputFilters(inpElement.value, (value) => /^-?\d*[.]?\d*$/.test(value)) // 'Must be a floating (real) number'
+  if (isInpNumber.value)
+    InputFilters(inpElement.value, value => /^-?\d*[.]?\d*$/.test(value)) // 'Must be a floating (real) number'
   // InputFilters(inputEL, (value) => /^-?\d*$/.test(value)) // 'Must be an integer'
   // InputFilters(inputEL, (value) => /^\d*$/.test(value)) // 'Must be an unsigned integer'
   // InputFilters(inputEL, (value) => /^\d*$/.test(value) && (value === '' || parseInt(value) <= 500)) // 'Must be between 0 and 500'
@@ -108,35 +113,43 @@ onMounted(() => {
   const shiftArrowDown = keys['Shift+ArrowDown']
   const shiftCmd = keys['Shift+cmd']
   const shiftCtrl = keys['Shift+Ctrl']
-  const arrowUp = keys['ArrowUp']
-  const arrowDown = keys['ArrowDown']
+  const arrowUp = keys.ArrowUp
+  const arrowDown = keys.ArrowDown
   const steps = computed((): string => {
-    if ((shiftCmd.value || shiftCtrl.value) && (arrowUp.value || arrowDown.value)) return '10'
-    if (shiftArrowUp.value || shiftArrowDown.value) return '1'
+    if ((shiftCmd.value || shiftCtrl.value) && (arrowUp.value || arrowDown.value))
+      return '10'
+    if (shiftArrowUp.value || shiftArrowDown.value)
+      return '1'
     return prop.step
   })
 
   watch(arrowUp, () => {
-    if (!arrowUp.value || inpElement.value === null || !isInpNumber.value) return
+    if (!arrowUp.value || inpElement.value === null || !isInpNumber.value)
+      return
     let inpAmount = '0'
-    if (isValidNumber.value) inpAmount = inpElement.value.value
+    if (isValidNumber.value)
+      inpAmount = inpElement.value.value
     const amount = scale(inpAmount, prop.decimals).add(scale(steps.value, prop.decimals))
-    if (amount.gt(0)) input.value = unScale(amount, prop.decimals).toString()
+    if (amount.gt(0))
+      input.value = unScale(amount, prop.decimals).toString()
   })
 
   watch(arrowDown, () => {
-    if (!arrowDown.value || inpElement.value === null || !isValidNumber.value || !isInpNumber.value) return
+    if (!arrowDown.value || inpElement.value === null || !isValidNumber.value || !isInpNumber.value)
+      return
     const inpAmount = inpElement.value.value
     const amount = scale(inpAmount, prop.decimals).sub(scale(steps.value, prop.decimals))
-    if (amount.gt(0)) input.value = unScale(amount, prop.decimals).toString()
-    if (amount.eq(0)) input.value = ''
+    if (amount.gt(0))
+      input.value = unScale(amount, prop.decimals).toString()
+    if (amount.eq(0))
+      input.value = ''
   })
 })
 
 onBeforeUnmount(() => {
   // Install input filters.
   if (isInpNumber.value && inpElement.value)
-    InputFilters(inpElement.value, (value) => /^-?\d*[.]?\d*$/.test(value), false) // remove listener
+    InputFilters(inpElement.value, value => /^-?\d*[.]?\d*$/.test(value), false) // remove listener
 })
 </script>
 
@@ -148,7 +161,7 @@ onBeforeUnmount(() => {
     :placeholder="`${placeholder}`"
     :disabled="readonly"
     class="unstyled-input w-full h-full text-base"
-  />
+  >
 </template>
 
 <style>
