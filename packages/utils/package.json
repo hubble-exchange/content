@@ -38,9 +38,6 @@
     "stub": "unbuild --stub",
     "test": "vitest --run"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/hubble-exchange"
-  },
   "dependencies": {
     "@ethersproject/bignumber": "^5.7.0",
     "@ethersproject/units": "^5.7.0"
