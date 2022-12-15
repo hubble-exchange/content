@@ -22,8 +22,7 @@ jobs:
         with:
           node-version: 18.x
           cache: pnpm
-          registry-url: 'https://npm.pkg.github.com/hubble-exchange'
-          scope: hubble-exchange
+          registry-url: 'https://registry.npmjs.org'
 
       - run: npx changelogithub 𝌡
         continue-on-error: true
