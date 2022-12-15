@@ -1,0 +1,48 @@
+{
+  "name": "@hubble-exchange/utils",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Utils for Hubble Exchange app and common utils DApp needs",
+  "license": "ISC",
+  "homepage": "https://github.com/hubble-exchange/content#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hubble-exchange/content.git",
+    "directory": "packages/utils"
+  },
+  "bugs": {
+    "url": "https://github.com/hubble-exchange/content/issues"
+  },
+  "keywords": [
+    "hubble-exchange",
+    "dapp-utils"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": "^14.16.0 || ^16.11.0 || ^17.0.0 || ^18.0.0"
+  },
+  "scripts": {
+    "build": "unbuild",
+    "stub": "unbuild --stub",
+    "test": "vitest --run"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/hubble-exchange"
+  },
+  "dependencies": {
+    "@ethersproject/bignumber": "^5.7.0",
+    "@ethersproject/units": "^5.7.0"
+  }
+}

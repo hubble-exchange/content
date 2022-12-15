@@ -8,14 +8,12 @@
     "postinstall": "nuxt prepare",
     "test": "vitest run"
   },
-  "peerDependencies": {
+  "devDependencies": {
     "@ethersproject/bignumber": "^5.7.0",
     "@ethersproject/units": "^5.7.0",
     "@vueuse/core": "^8.5.0",
-    "vue": "^3.2.21"
-  },
-  "devDependencies": {
     "nuxt": "3.0.0",
-    "vitest": "^0.25.3"
+    "vitest": "^0.25.3",
+    "vue": "^3.2.21"
   }
 }
