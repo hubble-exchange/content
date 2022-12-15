@@ -24,7 +24,7 @@ jobs:
           cache: pnpm
           registry-url: 'https://npm.pkg.github.com/hubble-exchange'
           scope: hubble-exchange
-      
+
       - run: npx changelogithub 𝌡
         continue-on-error: true
         env:
@@ -32,16 +32,16 @@ jobs:
 
       - name: Install Dependencies 📦
         run: pnpm install
-      
+
       - name: Run linter 👀
         run: pnpm lint
-      
+
       - name: Run vitest(test) 🧪
         run: pnpm run test
 
       - name: Run build 🧬
         run: pnpm run build
-      
+
       - name: Publish to NPM 🗞️
         run: pnpm publish --filter "./packages/utils" --access public
         env:
