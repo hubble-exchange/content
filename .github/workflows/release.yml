@@ -34,13 +34,13 @@ jobs:
         run: pnpm install
 
       - name: Run linter 👀
-        run: pnpm lint
+        run: pnpm run lint
 
       - name: Run vitest(test) 🧪
-        run: pnpm run test
+        run: pnpm --filter "./packages/utils" run test
 
       - name: Run build 🧬
-        run: pnpm run build
+        run: pnpm --filter "./packages/utils" run build
 
       - name: Publish to NPM 🗞️
         run: pnpm publish --filter "./packages/utils" --access public
