@@ -1,7 +1,7 @@
 {
   "name": "@hubble-exchange/utils",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Utils for Hubble Exchange app and common utils DApp needs",
   "license": "ISC",
   "homepage": "https://github.com/hubble-exchange/content#readme",
@@ -40,6 +40,8 @@
   },
   "dependencies": {
     "@ethersproject/bignumber": "^5.7.0",
-    "@ethersproject/units": "^5.7.0"
+    "@ethersproject/units": "^5.7.0",
+    "@pagerduty/pdjs": "^2.2.4",
+    "mongodb": "^4.13.0"
   }
 }
