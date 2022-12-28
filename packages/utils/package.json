@@ -40,6 +40,8 @@
   },
   "dependencies": {
     "@ethersproject/bignumber": "^5.7.0",
-    "@ethersproject/units": "^5.7.0"
+    "@ethersproject/units": "^5.7.0",
+    "@pagerduty/pdjs": "^2.2.4",
+    "mongodb": "^4.13.0"
   }
 }
