@@ -22,6 +22,16 @@
       "types": "./dist/index.d.ts",
       "require": "./dist/index.cjs",
       "import": "./dist/index.mjs"
+    },
+    "./mongo": {
+      "types": "./dist/mongo.d.ts",
+      "require": "./dist/mongo.cjs",
+      "import": "./dist/mongo.mjs"
+    },
+    "./pagerduty": {
+      "types": "./dist/pagerduty.d.ts",
+      "require": "./dist/pagerduty.cjs",
+      "import": "./dist/pagerduty.mjs"
     }
   },
   "main": "dist/index.cjs",
