@@ -54,12 +54,30 @@ export const scaleToString = (amount: string | number | bigint, decimals: BigNum
 }
 
 /**
+ * sanitize and scale the given user number to the given decimals (e.g. 100.00000023 with 6 decimal -> 1000000)
+ * @param amount The number to scale
+ * @param decimals The number of decimals to sanitize with and scale to
+ * @returns The scaled number in string (e.g. 100.00000023 with 6 decimal -> 1000000)
+ */
+export const scaleUserAmount = (amount: string | number, decimals = 6) => {
+  return scaleToString(shortenDecimals(amount, decimals), decimals)
+}
+
+/**
  * UnScale the given number to the given decimals (e.g. 1000000 with 6 decimal -> 1)
  * @param amount The number to un scale
  * @param decimals The number of decimals to un scale to
  * @returns The unscaled number in string (e.g. 1000000 with 6 decimal -> "1")
  */
 export const unScale = (amount: BigNumberish, decimals: BigNumberish = 6): string => formatUnits(amount, decimals)
+
+/**
+ * UnScale the given base number to the given decimals (e.g. 1000000000000000000000012 with 18 decimal -> 1000000)
+ * @param amount The number to un scale
+ * @param decimals The number of decimals to un scale to
+ * @returns The unscaled base number in string (e.g. 1000000000000000000000012 with 18 decimal -> 1000000)
+ */
+export const unScaleToBase = (amount: BigNumberish, decimals: BigNumberish = 6): string => shortenDecimals(formatUnits(amount, decimals), 0)
 
 /**
  * calculate total price from units using price per unit (e.g. units = 2e6, unitPrice = 1e5, unitDecimals = 6, priceDecimals = 6 => 0.2)

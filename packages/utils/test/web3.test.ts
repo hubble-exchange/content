@@ -2,13 +2,11 @@ import { BigNumber as BN } from '@ethersproject/bignumber'
 import { formatUnits } from '@ethersproject/units'
 import { describe, expect, it } from 'vitest'
 import {
-  calcTotalPrice,
-  calcUnitPrice,
+  calcTotalPrice, calcUnitPrice,
   decreaseNumByPercentage,
   getFormattedAmount, getPercentOfAmount, getPercentageOfAmount, increaseNumByPercentage,
-  scale,
-  scaleToString,
-  unScale,
+  scale, scaleToString, scaleUserAmount,
+  unScale, unScaleToBase,
 } from '../src'
 
 describe('increaseNumByPercentage', () => {
@@ -107,11 +105,29 @@ describe('scaleToString', () => {
   })
 })
 
+describe('scaleUserAmount', () => {
+  it('Scale and Sanitize amount by given decimals and returns string', () => {
+    const num = '45.366249072'
+    const decimals = 6
+    const result = scaleUserAmount(num, decimals)
+    expect(result).toEqual('45366249')
+    expect(formatUnits(result, decimals)).toEqual('45.366249')
+  })
+})
+
 describe('unScale', () => {
   it('unScale amount by given decimals and returns string', () => {
     const num = '45366240'
     const decimals = 6
     expect(unScale(num, decimals)).toEqual('45.36624')
+  })
+})
+
+describe('unScaleToBase', () => {
+  it('unScale to base amount by given decimals and returns string with no decimals', () => {
+    const num = '45366240903847'
+    const decimals = 6
+    expect(unScaleToBase(num, decimals)).toEqual('45366240')
   })
 })
 
