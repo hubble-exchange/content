@@ -1,7 +1,7 @@
 {
   "name": "@hubble-exchange/utils",
   "type": "module",
-  "version": "1.1.1",
+  "version": "1.2.1",
   "description": "Utils for Hubble Exchange app and common utils DApp needs",
   "license": "ISC",
   "homepage": "https://github.com/hubble-exchange/content#readme",
