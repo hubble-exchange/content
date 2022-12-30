@@ -135,6 +135,29 @@ export const calcUnitPrice = (
 }
 
 /**
+ * calculate units from unit price and total price (e.g. unitPrice = 2e6, totalPrice = 1e5, priceDecimals = 6 => 0.05)
+ * @param unitPrice - The price of single unit e.g. 2e6
+ * @param totalPrice - The price of total units e.g. 1e5
+ * @param priceDecimals - The price decimals e.g. 6
+ * @returns the units for the given unit price and total price e.g. 0.05
+ */
+export const calcUnits = (
+  unitPrice: BigNumberish,
+  totalPrice: BigNumberish,
+  unitDecimals = 6,
+  priceDecimals = 6,
+): AmountFormat => {
+  return getFormattedAmount(
+    BN.from(totalPrice)
+      .mul(bnPow(priceDecimals + unitDecimals))
+      .div(unitPrice)
+      .div(bnPow(priceDecimals))
+      .toString(),
+    unitDecimals,
+  )
+}
+
+/**
  * returns a n percent of the given BigNumberish (e.g. 10% of 100 = 10)
  * @param amount number to get percent of (e.g. 100)
  * @param percentage percent to get (e.g. 10)
