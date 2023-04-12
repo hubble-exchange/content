@@ -26,19 +26,19 @@
     "cleanup": "npx rimraf node_modules .netlify packages/*/dist packages/*/node_modules packages/*/.nuxt packages/*/.output"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.29.3",
-    "@commitlint/cli": "^17.2.0",
-    "@commitlint/config-conventional": "^17.2.0",
-    "@types/node": "^18.11.9",
-    "@typescript-eslint/eslint-plugin": "^5.42.0",
-    "@typescript-eslint/parser": "^5.42.0",
+    "@antfu/eslint-config": "^0.29.4",
+    "@commitlint/cli": "^17.5.1",
+    "@commitlint/config-conventional": "^17.4.4",
+    "@types/node": "^18.15.11",
+    "@typescript-eslint/eslint-plugin": "^5.58.0",
+    "@typescript-eslint/parser": "^5.58.0",
     "bumpp": "^8.2.1",
-    "eslint": "^8.26.0",
-    "husky": "^8.0.0",
+    "eslint": "^8.38.0",
+    "husky": "^8.0.3",
     "rimraf": "^3.0.2",
-    "typescript": "^4.8.4",
-    "unbuild": "^1.0.2",
-    "vite": "^4.0.1",
-    "vitest": "^0.25.3"
+    "typescript": "^4.9.5",
+    "unbuild": "^1.2.0",
+    "vite": "^4.2.1",
+    "vitest": "^0.25.8"
   }
 }
