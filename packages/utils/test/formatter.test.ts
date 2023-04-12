@@ -101,6 +101,9 @@ describe('timeDiffToString', () => {
     expect(timeDiffToString({ days: 0, hours: 0, mins: 0, secs: 2 })).toEqual('2s')
     expect(timeDiffToString({ days: 0, hours: 1, mins: 0, secs: 59 })).toEqual('1h 59s')
     expect(timeDiffToString({ days: 0, hours: 1, mins: 10, secs: 0 })).toEqual('1h 10m')
+    expect(timeDiffToString({ days: 0, hours: 0, mins: 0, secs: 0 })).toEqual('')
+    expect(timeDiffToString({ days: 0, hours: -1, mins: -12, secs: 0 })).toEqual('')
+    expect(timeDiffToString({ days: 0, hours: -1, mins: -12, secs: 0 }, true)).toEqual('-1h 12m')
   })
 })
 

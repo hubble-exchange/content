@@ -62,19 +62,26 @@ export const getTimestampedID = (): string => {
   return (Math.random().toString(36) + Date.now().toString(36)).substr(2)
 }
 
-export const timeDiffToString = (time: { days: number; hours: number; mins: number; secs: number }): string => {
+export const timeDiffToString = (
+  time: { days: number; hours: number; mins: number; secs: number },
+  returnNegative = false,
+): string => {
   let timeInWords = ''
-  if (time.days > 0)
-    timeInWords += `${time.days}d `
 
-  if (time.hours > 0)
-    timeInWords += `${time.hours}h `
+  if ((time.days < 0 || time.hours < 0 || time.mins < 0 || time.secs < 0) && returnNegative)
+    timeInWords += '-'
 
-  if (time.mins > 0)
-    timeInWords += `${time.mins}m `
+  if ((returnNegative && time.days !== 0) || (!returnNegative && time.days > 0))
+    timeInWords += `${Math.abs(time.days)}d `
 
-  if (time.secs > 0)
-    timeInWords += `${time.secs}s`
+  if ((returnNegative && time.hours !== 0) || (!returnNegative && time.hours > 0))
+    timeInWords += `${Math.abs(time.hours)}h `
+
+  if ((returnNegative && time.mins !== 0) || (!returnNegative && time.mins > 0))
+    timeInWords += `${Math.abs(time.mins)}m `
+
+  if ((returnNegative && time.secs !== 0) || (!returnNegative && time.secs > 0))
+    timeInWords += `${Math.abs(time.secs)}s`
 
   return timeInWords.trim()
 }
