@@ -13,14 +13,15 @@ export const bnToFloat = (num: BigNumberish, decimals = 6) => {
 /**
  * format value with give decimals and get original value with unScaled values with 3 decimals with comma and all decimals
  * @param value - value to format
- * @param decimals - number of decimals
- * @returns formatted value using decimals
+ * @param decimals - number of decimals to format (default: 6) (optional)
+ * @param displayDecimals - number of decimals to display (default: 3) (optional)
+ * @returns formatted value as object with base, formatted and formattedFull values as string
  */
-export const getFormattedAmount = (value: number | string, decimals = 6): AmountFormat => {
+export const getFormattedAmount = (value: number | string, decimals = 6, displayDecimals = 3): AmountFormat => {
   const valueFormatted = formatUnits(value, decimals)
   return {
     base: `${value}`,
-    formatted: shortenDecimals(commify(valueFormatted), 3, true),
+    formatted: shortenDecimals(commify(valueFormatted), displayDecimals, true),
     formattedFull: removeExtraZeros(valueFormatted),
   }
 }
