@@ -40,28 +40,8 @@ export type BigNumberish = BN | bigint | string | number
  * @param decimals The number of decimals to scale to
  * @returns The scaled number (e.g. 1 with 6 decimal -> 1000000)
  */
-export const scale = (amount: string | number | bigint, decimals: BigNumberish = 6): BN => {
+const scale = (amount: string | number | bigint, decimals: BigNumberish = 6): BN => {
   return parseUnits(amount.toString(), decimals)
-}
-
-/**
- * Scale the given number to the given decimals (e.g. 1 with 6 decimal -> 1000000)
- * @param amount The number to scale
- * @param decimals The number of decimals to scale to
- * @returns The scaled number in string (e.g. 1 with 6 decimal -> "1000000")
- */
-export const scaleToString = (amount: string | number | bigint, decimals: BigNumberish = 6): string => {
-  return parseUnits(amount.toString(), decimals).toString()
-}
-
-/**
- * sanitize and scale the given user number to the given decimals (e.g. 100.00000023 with 6 decimal -> 1000000)
- * @param amount The number to scale
- * @param decimals The number of decimals to sanitize with and scale to
- * @returns The scaled number in string (e.g. 100.00000023 with 6 decimal -> 1000000)
- */
-export const scaleUserAmount = (amount: string | number, decimals = 6) => {
-  return scaleToString(shortenDecimals(amount, decimals), decimals)
 }
 
 /**

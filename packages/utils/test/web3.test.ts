@@ -5,7 +5,6 @@ import {
   calcTotalPrice, calcUnitPrice, calcUnits,
   decreaseNumByPercentage,
   getFormattedAmount, getPercentOfAmount, getPercentageOfAmount, increaseNumByPercentage,
-  scale, scaleToString, scaleUserAmount,
   unScaleToBase,
 } from '../src'
 
@@ -82,36 +81,6 @@ describe('getPercentOfAmount', () => {
     const result = getPercentOfAmount(num, percent)
     expect(result).toEqual('566074')
     expect(formatUnits(result, 6)).toEqual('0.566074')
-  })
-})
-
-describe('scale', () => {
-  it('Scale amount by given decimals and returns BN', () => {
-    const num = '12'
-    const decimals = 6
-    const result = scale(num, decimals)
-    expect(result).toEqual(BN.from(12000000))
-    expect(formatUnits(result, decimals)).toEqual('12.0')
-  })
-})
-
-describe('scaleToString', () => {
-  it('Scale amount by given decimals and returns string', () => {
-    const num = '45.36624'
-    const decimals = 6
-    const result = scaleToString(num, decimals)
-    expect(result).toEqual('45366240')
-    expect(formatUnits(result, decimals)).toEqual('45.36624')
-  })
-})
-
-describe('scaleUserAmount', () => {
-  it('Scale and Sanitize amount by given decimals and returns string', () => {
-    const num = '45.366249072'
-    const decimals = 6
-    const result = scaleUserAmount(num, decimals)
-    expect(result).toEqual('45366249')
-    expect(formatUnits(result, decimals)).toEqual('45.366249')
   })
 })
 
