@@ -1,11 +1,9 @@
-import { BigNumber as BN } from '@ethersproject/bignumber'
 import { formatUnits } from '@ethersproject/units'
 import { describe, expect, it } from 'vitest'
 import {
   calcTotalPrice, calcUnitPrice, calcUnits,
   decreaseNumByPercentage,
   getFormattedAmount, getPercentOfAmount, getPercentageOfAmount, increaseNumByPercentage,
-  unScaleToBase,
 } from '../src'
 
 describe('increaseNumByPercentage', () => {
@@ -81,14 +79,6 @@ describe('getPercentOfAmount', () => {
     const result = getPercentOfAmount(num, percent)
     expect(result).toEqual('566074')
     expect(formatUnits(result, 6)).toEqual('0.566074')
-  })
-})
-
-describe('unScaleToBase', () => {
-  it('unScale to base amount by given decimals and returns string with no decimals', () => {
-    const num = '45366240903847'
-    const decimals = 6
-    expect(unScaleToBase(num, decimals)).toEqual('45366240')
   })
 })
 

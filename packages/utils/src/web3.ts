@@ -45,14 +45,6 @@ const scale = (amount: string | number | bigint, decimals: BigNumberish = 6): BN
 }
 
 /**
- * UnScale the given base number to the given decimals (e.g. 1000000000000000000000012 with 18 decimal -> 1000000)
- * @param amount The number to un scale
- * @param decimals The number of decimals to un scale to
- * @returns The unscaled base number in string (e.g. 1000000000000000000000012 with 18 decimal -> 1000000)
- */
-export const unScaleToBase = (amount: BigNumberish, decimals: BigNumberish = 6): string => shortenDecimals(formatUnits(amount, decimals), 0)
-
-/**
  * calculate total price from units using price per unit (e.g. units = 2e6, unitPrice = 1e5, unitDecimals = 6, priceDecimals = 6 => 0.2)
  * @param units - The units to convert e.g. 2e6
  * @param unitPrice - The unit price e.g. 1e5

@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import { unScale } from './unscale.js'
+import { unScale, unScaleToBase } from './unscale'
 
 test('converts value to number', () => {
   expect(unScale(BigInt(69), 0)).toMatchInlineSnapshot('"69"')
@@ -33,4 +33,11 @@ test('converts value to number', () => {
   expect(
     unScale(BigInt('-694212312312306942012345444446789123450000000000000000000000000000000'), 50),
   ).toMatchInlineSnapshot('"-6942123123123069420.1234544444678912345"')
+})
+
+test('converts value to base', () => {
+  expect(unScaleToBase(BigInt('69000300300000000000'), 18, 6)).toMatchInlineSnapshot('69000300n')
+  expect(unScaleToBase(BigInt('-69000300300000000000'), 18, 6)).toMatchInlineSnapshot('-69000300n')
+  expect(unScaleToBase(BigInt(69), 0, 0)).toMatchInlineSnapshot('69n')
+  expect(unScaleToBase(BigInt(-69), 0, 0)).toMatchInlineSnapshot('-69n')
 })
