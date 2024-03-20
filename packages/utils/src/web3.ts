@@ -65,14 +65,6 @@ export const scaleUserAmount = (amount: string | number, decimals = 6) => {
 }
 
 /**
- * UnScale the given number to the given decimals (e.g. 1000000 with 6 decimal -> 1)
- * @param amount The number to un scale
- * @param decimals The number of decimals to un scale to
- * @returns The unscaled number in string (e.g. 1000000 with 6 decimal -> "1")
- */
-export const unScale = (amount: BigNumberish, decimals: BigNumberish = 6): string => formatUnits(amount, decimals)
-
-/**
  * UnScale the given base number to the given decimals (e.g. 1000000000000000000000012 with 18 decimal -> 1000000)
  * @param amount The number to un scale
  * @param decimals The number of decimals to un scale to

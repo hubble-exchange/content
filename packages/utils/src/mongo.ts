@@ -9,9 +9,9 @@ export class MongoClient {
 
   async initialize(uri: string, dbName: string) {
     /**
-         * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
-         * See https://docs.mongodb.com/ecosystem/drivers/node/ for more details
-         */
+    * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
+    * See https://docs.mongodb.com/ecosystem/drivers/node/ for more details
+    */
     this.mongoClient = new mongoDB.MongoClient(uri)
     // connect to the MongoDB cluster
     await this.mongoClient.connect()

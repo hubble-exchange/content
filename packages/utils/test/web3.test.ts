@@ -6,7 +6,7 @@ import {
   decreaseNumByPercentage,
   getFormattedAmount, getPercentOfAmount, getPercentageOfAmount, increaseNumByPercentage,
   scale, scaleToString, scaleUserAmount,
-  unScale, unScaleToBase,
+  unScaleToBase,
 } from '../src'
 
 describe('increaseNumByPercentage', () => {
@@ -112,14 +112,6 @@ describe('scaleUserAmount', () => {
     const result = scaleUserAmount(num, decimals)
     expect(result).toEqual('45366249')
     expect(formatUnits(result, decimals)).toEqual('45.366249')
-  })
-})
-
-describe('unScale', () => {
-  it('unScale amount by given decimals and returns string', () => {
-    const num = '45366240'
-    const decimals = 6
-    expect(unScale(num, decimals)).toEqual('45.36624')
   })
 })
 
