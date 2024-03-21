@@ -2,6 +2,7 @@ export * from './formatter'
 export * from './web3'
 export * from './units/unscale'
 export * from './units/scale'
+export * from './units/bigUtils'
 
 export const simulateAsyncPause = (duration = 1000) =>
   new Promise<void>((resolve) => {
