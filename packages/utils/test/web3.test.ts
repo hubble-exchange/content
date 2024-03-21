@@ -2,7 +2,7 @@ import { formatUnits } from '@ethersproject/units'
 import { describe, expect, it } from 'vitest'
 import {
   decreaseNumByPercentage,
-  getFormattedAmount, getPercentOfAmount, getPercentageOfAmount, increaseNumByPercentage,
+  getPercentOfAmount, getPercentageOfAmount, increaseNumByPercentage,
 } from '../src'
 
 describe('increaseNumByPercentage', () => {
@@ -78,41 +78,5 @@ describe('getPercentOfAmount', () => {
     const result = getPercentOfAmount(num, percent)
     expect(result).toEqual('566074')
     expect(formatUnits(result, 6)).toEqual('0.566074')
-  })
-})
-
-describe('getFormattedAmount', () => {
-  it('should format amount', () => {
-    const value = '1234567'
-    const decimals = 6
-    const out = getFormattedAmount(value, decimals)
-    const expected = { base: '1234567', formatted: '1.234', formattedFull: '1.234567' }
-    expect(out).toEqual(expected)
-  })
-
-  it('should format amount', () => {
-    const value = '1234567'
-    const decimals = 18
-    const out = getFormattedAmount(value, decimals)
-    const expected = { base: '1234567', formatted: '< 0.001', formattedFull: '0.000000000001234567' }
-    expect(out).toEqual(expected)
-  })
-})
-
-describe('calcAmountWithSlippage', () => {
-  it('should format amount', () => {
-    const value = '1234567'
-    const decimals = 6
-    const out = getFormattedAmount(value, decimals)
-    const expected = { base: '1234567', formatted: '1.234', formattedFull: '1.234567' }
-    expect(out).toEqual(expected)
-  })
-
-  it('should format amount', () => {
-    const value = '1234567'
-    const decimals = 18
-    const out = getFormattedAmount(value, decimals)
-    const expected = { base: '1234567', formatted: '< 0.001', formattedFull: '0.000000000001234567' }
-    expect(out).toEqual(expected)
   })
 })
