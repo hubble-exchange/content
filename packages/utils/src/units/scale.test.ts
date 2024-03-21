@@ -20,6 +20,7 @@ test('converts number to unit of a given length', () => {
   expect(scale('-6942069420.12345678912345', 18)).toMatchInlineSnapshot('-6942069420123456789123450000n')
   expect(scale('-6942123123123069420.1234544444678912345', 50))
     .toMatchInlineSnapshot('-694212312312306942012345444446789123450000000000000000000000000000000n')
+  expect(scale(BigInt(1e6), 18)).toMatchInlineSnapshot('1000000000000000000000000n')
 })
 
 test('decimals === 0', () => {

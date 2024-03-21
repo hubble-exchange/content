@@ -2,7 +2,7 @@ import { absBig } from './bigUtils'
 import { scale } from './scale'
 import { unScaleToBase } from './unscale'
 
-const precisionCatalyst = 6 // to avoid loss of precision if the given decimals are not enough
+const precisionCatalyst = 6 // to avoid total loss of precision if the given decimals are not enough
 
 /**
  * Calculates the unit price based on the number of units and total price.
@@ -20,7 +20,7 @@ export function calcPrice(
   const priceDecimalsFactor = priceDecimals + priceDecimals + unitDecimals + precisionCatalyst
 
   return unScaleToBase(
-    scale(totalPrice.toString(), priceDecimalsFactor) / BigInt(units),
+    scale(totalPrice, priceDecimalsFactor) / BigInt(units),
     priceDecimalsFactor,
     unitDecimals,
   )
@@ -37,7 +37,7 @@ export function calcUnits(
 ) {
   const priceDecimalsFactor = priceDecimals + priceDecimals + unitDecimals + precisionCatalyst
   return unScaleToBase(
-    scale(totalPrice.toString(), priceDecimalsFactor) / BigInt(unitPrice),
+    scale(totalPrice, priceDecimalsFactor) / BigInt(unitPrice),
     priceDecimalsFactor,
     unitDecimals,
   )

@@ -19,8 +19,8 @@ export function setAlwaysRoundDown(value: boolean) {
  * scale(112.5632, 0) // 113n
  * scale(112.5632, 0, true) // 112n
  */
-export function scale(value: string | number, decimals: number, roundDown = isAlwaysRoundDown) {
-  let [integer, fraction = '0'] = `${value}`.split('.')
+export function scale(value: string | number | bigint, decimals: number, roundDown = isAlwaysRoundDown) {
+  let [integer, fraction = '0'] = value.toString().split('.')
 
   const negative = integer.startsWith('-')
   if (negative)
