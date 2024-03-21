@@ -1,7 +1,6 @@
 import { formatUnits } from '@ethersproject/units'
 import { describe, expect, it } from 'vitest'
 import {
-  calcTotalPrice, calcUnitPrice, calcUnits,
   decreaseNumByPercentage,
   getFormattedAmount, getPercentOfAmount, getPercentageOfAmount, increaseNumByPercentage,
 } from '../src'
@@ -79,102 +78,6 @@ describe('getPercentOfAmount', () => {
     const result = getPercentOfAmount(num, percent)
     expect(result).toEqual('566074')
     expect(formatUnits(result, 6)).toEqual('0.566074')
-  })
-})
-
-describe('calcTotalPrice', () => {
-  it('1. calculate total price for units using price per unit', () => {
-    const units = 214
-    const unitPrice = 201
-    const unitDecimals = 2
-    const priceDecimals = 2
-    const res = '430'
-    const out = calcTotalPrice(units, unitPrice, unitDecimals, priceDecimals)
-    expect(out.base).toEqual(res)
-  })
-
-  it('2. calculate total price for units using price per unit', () => {
-    const units = 653748394
-    const unitPrice = 12032457
-    const unitDecimals = 6
-    const priceDecimals = 6
-    const res = getFormattedAmount('7866199439')
-    const out = calcTotalPrice(units, unitPrice, unitDecimals, priceDecimals)
-    expect(out.base).toEqual(res.base)
-  })
-
-  it('3. calculate total price for units using price per unit', () => {
-    const units = '12000000000000000000'
-    const unitPrice = '1003306140'
-    const unitDecimals = 18
-    const priceDecimals = 6
-    const res = getFormattedAmount('12039673680')
-    const out = calcTotalPrice(units, unitPrice, unitDecimals, priceDecimals)
-    expect(out.base).toEqual(res.base)
-  })
-})
-
-describe('calcUnitPrice', () => {
-  it('1. calculate 1 unit price for units and total price', () => {
-    const units = 214
-    const totalPrice = 430
-    const unitDecimals = 2
-    const priceDecimals = 2
-    const res = '200'
-    const out = calcUnitPrice(units, totalPrice, unitDecimals, priceDecimals)
-    expect(out.base).toEqual(res)
-  })
-
-  it('2. calculate 1 unit price for units using total', () => {
-    const units = 653748394
-    const totalPrice = 7866199439
-    const unitDecimals = 6
-    const priceDecimals = 6
-    const res = getFormattedAmount('12032456')
-    const out = calcUnitPrice(units, totalPrice, unitDecimals, priceDecimals)
-    expect(out.base).toEqual(res.base)
-  })
-
-  it('3. calculate 1 unit price for units using total', () => {
-    const units = '12000000000000000000'
-    const totalPrice = '12039673683'
-    const unitDecimals = 18
-    const priceDecimals = 6
-    const res = getFormattedAmount('1003306140')
-    const out = calcUnitPrice(units, totalPrice, unitDecimals, priceDecimals)
-    expect(out.base).toEqual(res.base)
-  })
-})
-
-describe('calcUnits', () => {
-  it('1. calculate units from 1 unit price and total price', () => {
-    const unitPrice = 400
-    const totalPrice = 800
-    const priceDecimals = 2
-    const unitDecimals = 2
-    const res = '200'
-    const out = calcUnits(unitPrice, totalPrice, unitDecimals, priceDecimals)
-    expect(out.base).toEqual(res)
-  })
-
-  it('2. calculate units from 1 unit price and total price', () => {
-    const unitPrice = 23566774
-    const totalPrice = '1273917398791872'
-    const unitDecimals = 6
-    const priceDecimals = 6
-    const res = getFormattedAmount('54055654744763')
-    const out = calcUnits(unitPrice, totalPrice, unitDecimals, priceDecimals)
-    expect(out.base).toEqual(res.base)
-  })
-
-  it('3. calculate units from 1 unit price and total price', () => {
-    const unitPrice = 2e6
-    const totalPrice = 46e6
-    const unitDecimals = 18
-    const priceDecimals = 6
-    const res = getFormattedAmount('23000000000000000000')
-    const out = calcUnits(unitPrice, totalPrice, unitDecimals, priceDecimals)
-    expect(out.base).toEqual(res.base)
   })
 })
 

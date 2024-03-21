@@ -1,0 +1,64 @@
+import { absBig } from './bigUtils'
+import { scale } from './scale'
+import { unScaleToBase } from './unscale'
+
+const precisionCatalyst = 6 // to avoid loss of precision if the given decimals are not enough
+
+/**
+ * Calculates the unit price based on the number of units and total price.
+ * @param noAbs pass `true` to allow -ve values for resulted unit price
+ * @example
+ * calcPrice(BigInt(2e6), BigInt(1e5), 6, 6) // 50000n
+ */
+export function calcPrice(
+  units: string | bigint, totalPrice: string | bigint, unitDecimals = 18, priceDecimals = 6, noAbs = false,
+) {
+  if (!noAbs) // due to nature of the exchange, we need to support negative values for units and return +ve unit price
+    units = absBig(units)
+
+  // to avoid underflow and retain precision
+  const priceDecimalsFactor = priceDecimals + priceDecimals + unitDecimals + precisionCatalyst
+
+  return unScaleToBase(
+    scale(totalPrice.toString(), priceDecimalsFactor) / BigInt(units),
+    priceDecimalsFactor,
+    unitDecimals,
+  )
+}
+
+/**
+ * Calculates units based on the total price and number of units.
+ * @example
+ * calcUnits(BigInt(1e5), BigInt(2e6)) // 50000000000000000n
+ * calcUnits('1000', '1200', 2, 2) // 83n === 0.83 * 10^2
+ */
+export function calcUnits(
+  totalPrice: string | bigint, unitPrice: string | bigint, priceDecimals = 6, unitDecimals = 18,
+) {
+  const priceDecimalsFactor = priceDecimals + priceDecimals + unitDecimals + precisionCatalyst
+  return unScaleToBase(
+    scale(totalPrice.toString(), priceDecimalsFactor) / BigInt(unitPrice),
+    priceDecimalsFactor,
+    unitDecimals,
+  )
+}
+
+/**
+ * Calculates the total price based on the number of units and unit price.
+ * @param noAbs pass `true` to allow -ve values for resulted total price
+ * @example
+ * calcTotalPrice('100', '12', 2, 2) // 12n
+ * BigInt(2223e17), '12000000', 18, 6) // 2667600000n
+ */
+export function calcTotalPrice(
+  units: string | bigint, unitPrice: string | bigint, unitDecimals = 18, priceDecimals = 6, noAbs = false,
+) {
+  if (!noAbs) // due to nature of the exchange, we need to support negative values for units and return +ve total price
+    units = absBig(units)
+
+  return unScaleToBase(
+    BigInt(units) * BigInt(unitPrice),
+    unitDecimals + priceDecimals,
+    priceDecimals,
+  )
+}
