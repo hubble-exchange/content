@@ -1,126 +1,47 @@
-// String/Number formatters
-export const shortenString = (value: string, [startCount = 4, endCount = 4, ellipse = '...'] = []): string => {
-  if (value.length > startCount + endCount) {
-    const start = value.slice(0, startCount)
-    const end = value.slice(value.length - endCount)
-    return start + ellipse + end
-  }
+/**
+ * Shortens a string by removing characters from the middle and replacing them with an ellipse.
+ * @example
+ * shortenString('0x7a7a7229292286592739473748234343434532345', 4, 4) // '0x7a...2345'
+ * shortenString('0x7a7a7229292286592739473748234343434532345', 4, 4, '***') // '0x7a***2345'
+ * shortenString('0x7a7a7229292286592739473748234343434532345', 6, 4, '...') // '0x7a7a...2345'
+ */
+export function shortenString(value: string, startCount = 4, endCount = 4, ellipse = '...') {
+  if (value.length > startCount + endCount)
+    return value.slice(0, startCount) + ellipse + value.slice(-endCount)
+
   return value
 }
 
-export const getSmallestDecimalString = (amount: string | number, decimals = 4): string => {
-  if (decimals > 0 && Number(amount) > 0 && Number(amount) < Number(`0.${'0'.repeat(decimals - 1)}1`))
-    return `< 0.${'0'.repeat(decimals - 1)}1`
-
-  if (decimals > 0 && Number(amount) < 0 && Number(amount) > Number(`-0.${'0'.repeat(decimals - 1)}9`))
-    return `< -0.${'0'.repeat(decimals - 1)}9`
-
-  return String(amount)
-}
-
-export const removeExtraZeros = (amount: string | number): string => {
-  return `${amount}`.replace(/^0*(\d+|\d+\.\d+?)\.?0*$/, '$1') // remove tailing zeros after decimal point
-}
-
-export const shortenDecimals = (amount: string | number, decimals = 4, minNum = false): string => {
-  if (minNum) {
-    const minAmount = getSmallestDecimalString(amount, decimals) // if minNum is true, return the minimum value to display
-    if (minAmount !== String(amount))
-      return minAmount
-  }
-
-  const parts = `${amount}`.split('.')
-  if (parts.length === 2) {
-    const formattedDecimals = parts[1].slice(0, decimals)
-    if (decimals <= 0 || Number(formattedDecimals) <= 0)
-      return Number(parts[0]) === 0 ? '0' : parts[0]
-    // remove tailing zeros after decimal point
-    return removeExtraZeros(`${parts[0]}.${formattedDecimals}`)
-  }
-  return removeExtraZeros(amount)
+/**
+ * timestamped id with random string with timestamp
+ */
+export function getTimestampedID() {
+  return (Math.random().toString(36) + Date.now().toString(36)).slice(2)
 }
 
 /**
- * Add Comma to a number or amount string with comma to make it more readable for user (e.g. 1000000 to 1,000,000)
- * @param amount amount to format with comma
- * @param ignoreDecimals default true, if true, returns amount with comma included comma in decimals
- * @returns {string} formatted amount with comma
+ * formats time object to string with days, hours, minutes and seconds
+ * @example
+ * formatTime({ days: 1, hours: 2, mins: 3, secs: 4 }) // '1d 2h 3m 4s'
+ * formatTime({ days: 1, hours: 2, mins: 3, secs: 4 }, true) // '-1d 2h 3m 4s'
+ * formatTime({ days: 0, hours: 0, mins: 3, secs: 4 }) // '3m 4s'
+ * formatTime({ days: 0, hours: 0, mins: 0, secs: 4 }) // '4s'
  */
-export const addCommaToAmount = (amount: string | number, ignoreDecimals = true): string => {
-  if (ignoreDecimals) {
-    const parts = `${amount}`.split('.')
-    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-    if (parts.length === 2)
-      return parts.join('.')
-    return parts[0]
-  }
-
-  return `${amount}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-}
-
-export const getTimestampedID = (): string => {
-  return (Math.random().toString(36) + Date.now().toString(36)).substr(2)
-}
-
-export const timeDiffToString = (
-  time: { days: number; hours: number; mins: number; secs: number },
-  returnNegative = false,
+export const formatTime = (
+  { days = 0, hours = 0, mins = 0, secs = 0 }: { days?: number; hours?: number; mins?: number; secs?: number },
+  negative = false,
 ): string => {
-  let timeInWords = ''
+  // if it's negative and negative is not allowed, return empty string
+  if (!negative && (days < 0 || hours < 0 || mins < 0 || secs < 0))
+    return ''
 
-  if ((time.days < 0 || time.hours < 0 || time.mins < 0 || time.secs < 0) && returnNegative)
-    timeInWords += '-'
+  const sign = (negative && (days < 0 || hours < 0 || mins < 0 || secs < 0)) ? '-' : ''
 
-  if ((returnNegative && time.days !== 0) || (!returnNegative && time.days > 0))
-    timeInWords += `${Math.abs(time.days)}d `
+  let timeString = ''
+  timeString += days ? `${Math.abs(days)}d ` : ''
+  timeString += hours ? `${Math.abs(hours)}h ` : ''
+  timeString += mins ? `${Math.abs(mins)}m ` : ''
+  timeString += secs ? `${Math.abs(secs)}s` : ''
 
-  if ((returnNegative && time.hours !== 0) || (!returnNegative && time.hours > 0))
-    timeInWords += `${Math.abs(time.hours)}h `
-
-  if ((returnNegative && time.mins !== 0) || (!returnNegative && time.mins > 0))
-    timeInWords += `${Math.abs(time.mins)}m `
-
-  if ((returnNegative && time.secs !== 0) || (!returnNegative && time.secs > 0))
-    timeInWords += `${Math.abs(time.secs)}s`
-
-  return timeInWords.trim()
-}
-
-// Pagination helpers
-export interface Page {
-  items: unknown[]
-  page: number
-  limit: number
-  hasPrev: boolean
-  hasNext: boolean
-  start?: number
-  end?: number
-}
-
-const paginate = (items: unknown[], page: number, limit: number): Page => {
-  const start = page * limit - limit
-  const end = start + limit
-
-  return {
-    items: [...items].splice(start, limit),
-    page,
-    limit,
-    hasPrev: page > 1,
-    hasNext: end < items.length,
-    start,
-    end,
-  }
-}
-
-const getPageNumberArray = (length: number, limit: number): number[] => {
-  const pageNumberArray: number[] = []
-  for (let i = 1; i <= Math.ceil(length / limit); i++)
-    pageNumberArray.push(i)
-
-  return pageNumberArray
-}
-
-export const pagination = {
-  paginate,
-  getPageNumberArray,
+  return sign + timeString.trim()
 }

@@ -1,6 +1,6 @@
 import { BigNumber as BN } from '@ethersproject/bignumber'
 import { formatUnits, parseUnits } from '@ethersproject/units'
-import { shortenDecimals } from './formatter'
+import { shortenDecimals } from './units/formatter'
 
 export const bnPow = (decimal = 6, base = 10): string => {
   return BN.from(base).pow(decimal).toString()
