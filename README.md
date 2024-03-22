@@ -17,3 +17,7 @@ Format code with `pnpm lint --fix` to let ESLint formats and lints the code.
 Learn more about the [ESLint Setup](https://github.com/antfu/contribute/blob/main/README.md#eslint).
 
 [Don't use Prettier.](https://github.com/antfu/contribute/blob/main/README.md#no-prettier)
+
+## Packages
+
+`@hubble-exchange/utils` - Utility for bigint and other common functions read more [here](/packages/utils/README.md)

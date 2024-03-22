@@ -16,4 +16,4 @@ yarn add @hubble-exchange/utils
 npm install @hubble-exchange/utils
 ```
 
-[Check out TSDocs.dev for the full documentation](https://tsdocs.dev/docs/@hubble-exchange/utils)
+[Check out TSDocs.dev for the full documentation](https://tsdocs.dev/docs/@hubble-exchange/utils/2.1.0/index.html)
