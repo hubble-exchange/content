@@ -1,5 +1,4 @@
 export * from './formatter'
-export * from './web3'
 export * from './units/unscale'
 export * from './units/scale'
 export * from './units/bigUtils'
@@ -11,7 +10,16 @@ export const simulateAsyncPause = (duration = 1000) =>
     setTimeout(() => resolve(), duration)
   })
 
-export const range = (start: number, stop: number, step = 1): number[] =>
-  Array(Math.ceil((stop + 1 - start) / step))
-    .fill(start)
-    .map((x: number, y: number): number => x + y * step)
+export const range = (start: number, stop: number, step = 1): number[] => {
+  if (step <= 0)
+    return []
+
+  // Correctly calculate the number of elements in the range.
+  const size = Math.ceil((stop - start + 1) / step)
+  const result: number[] = new Array(size)
+
+  for (let i = 0; i < size; i++)
+    result[i] = start + i * step
+
+  return result
+}
