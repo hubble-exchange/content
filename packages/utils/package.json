@@ -2,7 +2,7 @@
   "name": "@hubble-exchange/utils",
   "type": "module",
   "version": "1.4.0",
-  "description": "Utils for Hubble Exchange app and common utils DApp needs",
+  "description": "Zero dependencies utils for A DEX DApp with perfect precision and performance",
   "license": "ISC",
   "homepage": "https://github.com/hubble-exchange/content#readme",
   "repository": {
@@ -41,7 +41,7 @@
     "dist"
   ],
   "engines": {
-    "node": "^14.16.0 || ^16.11.0 || ^17.0.0 || ^18.0.0"
+    "node": "^14.16.0 || ^16.11.0 || ^17.0.0 || ^18.0.0 || ^20.0.0"
   },
   "scripts": {
     "build": "unbuild",
@@ -49,8 +49,6 @@
     "test": "vitest --run"
   },
   "dependencies": {
-    "@ethersproject/bignumber": "^5.7.0",
-    "@ethersproject/units": "^5.7.0",
     "@pagerduty/pdjs": "^2.2.4",
     "mongodb": "^4.13.0"
   }

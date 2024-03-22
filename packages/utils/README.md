@@ -1,10 +1,19 @@
 # Utils
 
-Common utils functions for
+Zero Dependency & precision perfect Utils for BigInt manipulation and formatting for Exchange and DeFi applications.
 
-- String/Number formatters
-- Common Web3 utils
+## Installation
 
-## Usage
+```bash
+pnpm add @hubble-exchange/utils
 
-Install `@ethersproject/bignumber` and `@ethersproject/units` to your project these are used as external packages
+# or 
+
+yarn add @hubble-exchange/utils
+
+# or
+
+npm install @hubble-exchange/utils
+```
+
+[Check out TSDocs.dev for the full documentation](https://tsdocs.dev/docs/@hubble-exchange/utils)

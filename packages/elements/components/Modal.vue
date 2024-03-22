@@ -25,18 +25,15 @@ watch(escape, () => escape.value && emit('close'))
         >
           <transition name="centered-appear">
             <div
+              v-if="prop.show"
               class="fixed inset-0 w-full h-full z-20 bg-originalBlack bg-opacity-10 overflow-y-auto hidden-scrollbar duration-300"
-              style="backdrop-filter: blur(10px)"
-              @click="emit('close')"
+              style="backdrop-filter: blur(10px)" @click="emit('close')"
             />
           </transition>
           <transition name="centered-appear" appear leave>
             <div
-              v-if="show"
-              class="relative mx-auto overflow-y-auto max-h-1/1.1 p-14"
-              :class="[...prop.classes]"
-              role="dialog"
-              aria-label="Modal"
+              v-if="show" class="relative mx-auto overflow-y-auto max-h-1/1.1 p-14" :class="[...prop.classes]"
+              role="dialog" aria-label="Modal"
             >
               <div class="relative shadow-lg w-full z-20">
                 <slot />
