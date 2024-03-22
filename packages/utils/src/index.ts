@@ -5,6 +5,7 @@ export * from './units/multiple'
 export * from './units/price'
 export * from './units/scale'
 export * from './units/unscale'
+export * from './units/percent'
 
 export const simulateAsyncPause = (duration = 1000) =>
   new Promise<void>((resolve) => {
