@@ -1,10 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import {
-  formatTime,
-  getTimestampedID,
-  range,
-  shortenString,
-} from '../src'
+import { formatTime, getTimestampedID, range, shortenString } from '../src'
 
 describe('shortenString', () => {
   it('shorten string by 4 character from both side and concat with ...', () => {

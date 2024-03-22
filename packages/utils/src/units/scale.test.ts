@@ -11,6 +11,7 @@ test('converts number to unit of a given length', () => {
   expect(scale(1.2345, 4)).toMatchInlineSnapshot('12345n')
   expect(scale(1.0045, 4)).toMatchInlineSnapshot('10045n')
   expect(scale(1.2345000, 4)).toMatchInlineSnapshot('12345n')
+  expect(scale(1.2345000, 2)).toMatchInlineSnapshot('123n')
   expect(scale('6942069420.12345678912345', 18)).toMatchInlineSnapshot('6942069420123456789123450000n')
   expect(scale('6942069420.00045678912345', 18)).toMatchInlineSnapshot('6942069420000456789123450000n')
   expect(scale('6942123123123069420.1234544444678912345', 50))
