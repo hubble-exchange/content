@@ -1,6 +1,8 @@
 import { scale } from './scale'
 import { unScale, unScaleToBase } from './unscale'
 
+const ZERO = BigInt(0)
+
 /**
  * Calculates the specified percentage of a given value.
  *
@@ -49,16 +51,23 @@ const percentCatalyst = 6
 export function calcPercentage(
   value: string | number | bigint, secondValue: string | number | bigint, decimals: number, precision = 3,
 ) {
-  return Number(Number(unScale(
-    scale(BigInt(secondValue), decimals + decimals + percentCatalyst) / BigInt(value),
-    decimals + decimals + percentCatalyst - 2,
-  )).toFixed(precision))
+  value = BigInt(value)
+  secondValue = BigInt(secondValue)
+  if (secondValue === ZERO || value === ZERO)
+    return 0
+
+  return Number(
+    Number(unScale(
+      scale(secondValue, decimals + decimals + percentCatalyst) / value,
+      decimals + decimals + percentCatalyst - 2,
+    )).toFixed(precision),
+  )
 }
 
 /**
  * Increase a number by given percentage
  *
- * @param value - The number to increase
+ * @param value - The number to increasea
  * @param percentage - The percentage to increase by
  * @param decimals - The decimals of the value.
  *
@@ -71,7 +80,7 @@ export function calcPercentage(
  */
 export function increaseByPercentage(value: string | bigint | number, percentage: number | string, decimals: number) {
   value = BigInt(value)
-  return value + (calcPercentValue(value, percentage, decimals) * (value < BigInt(0) ? BigInt(-1) : BigInt(1)))
+  return value + (calcPercentValue(value, percentage, decimals) * (value < ZERO ? BigInt(-1) : BigInt(1)))
 }
 
 /**
@@ -90,5 +99,5 @@ export function increaseByPercentage(value: string | bigint | number, percentage
  */
 export function decreaseByPercentage(value: string | bigint | number, percentage: number | string, decimals: number) {
   value = BigInt(value)
-  return value - (calcPercentValue(value, percentage, decimals) * (value < BigInt(0) ? BigInt(-1) : BigInt(1)))
+  return value - (calcPercentValue(value, percentage, decimals) * (value < ZERO ? BigInt(-1) : BigInt(1)))
 }

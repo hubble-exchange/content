@@ -1,3 +1,5 @@
+const ZERO = BigInt(0)
+
 /**
  * Gets the sign of a number represented as a string, or bigint.
  * @param num {string | bigint} The number in string or bigint format to be used for deciding the sign.
@@ -5,7 +7,7 @@
  */
 export function getBigSign(num: string | bigint): -1 | 0 | 1 {
   num = BigInt(num)
-  return num === BigInt(0) ? 0 : num > BigInt(0) ? 1 : -1
+  return num === ZERO ? 0 : num > ZERO ? 1 : -1
 }
 
 /**
@@ -16,5 +18,5 @@ export function getBigSign(num: string | bigint): -1 | 0 | 1 {
  */
 export function absBig(num: bigint | string): bigint {
   num = BigInt(num)
-  return num < BigInt(0) ? -num : num
+  return num < ZERO ? -num : num
 }

@@ -13,6 +13,8 @@ test('calc percent of the given value', () => {
   expect(calcPercentValue(1e6, 0, 6)).toMatchInlineSnapshot('0n')
   expect(calcPercentValue(50, 150, 0)).toMatchInlineSnapshot('75n')
   expect(calcPercentValue(50, 1500000000000000, 0)).toMatchInlineSnapshot('750000000000000n')
+  expect(calcPercentValue(0, 0, 0)).toMatchInlineSnapshot('0n')
+  expect(calcPercentValue(0, 100, 0)).toMatchInlineSnapshot('0n')
 })
 
 test('calc percentage of the second value from the main value', () => {
@@ -29,13 +31,19 @@ test('calc percentage of the second value from the main value', () => {
   expect(calcPercentage(50, 75, 0)).toMatchInlineSnapshot('150')
   expect(calcPercentage(50, 750, 0)).toMatchInlineSnapshot('1500')
   expect(calcPercentage(1e6, 0, 6)).toMatchInlineSnapshot('0')
+  expect(calcPercentage(0, 0, 6)).toMatchInlineSnapshot('0')
+  expect(calcPercentage(0, 100, 6)).toMatchInlineSnapshot('0')
 })
 
 test('increase a number by given percentage', () => {
   expect(increaseByPercentage('100', 10, 2)).toMatchInlineSnapshot('110n')
   expect(increaseByPercentage('100', 25, 2)).toMatchInlineSnapshot('125n')
   expect(increaseByPercentage('100', 0, 2)).toMatchInlineSnapshot('100n')
+  expect(increaseByPercentage('100', 0, 2)).toMatchInlineSnapshot('100n')
   expect(increaseByPercentage(-100, 50, 9)).toMatchInlineSnapshot('-50n')
+  expect(increaseByPercentage(0, 50, 9)).toMatchInlineSnapshot('0n')
+  expect(increaseByPercentage(0, 0, 9)).toMatchInlineSnapshot('0n')
+  expect(increaseByPercentage(-0, 0, 9)).toMatchInlineSnapshot('0n')
 })
 
 test('decease a number by given percentage', () => {
@@ -43,4 +51,7 @@ test('decease a number by given percentage', () => {
   expect(decreaseByPercentage('100', 25, 2)).toMatchInlineSnapshot('75n')
   expect(decreaseByPercentage('100', 0, 2)).toMatchInlineSnapshot('100n')
   expect(decreaseByPercentage(-100, 50, 9)).toMatchInlineSnapshot('-150n')
+  expect(decreaseByPercentage(0, 50, 9)).toMatchInlineSnapshot('0n')
+  expect(decreaseByPercentage(0, 0, 9)).toMatchInlineSnapshot('0n')
+  expect(decreaseByPercentage(-0, 0, 9)).toMatchInlineSnapshot('0n')
 })

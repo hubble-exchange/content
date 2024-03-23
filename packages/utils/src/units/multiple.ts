@@ -1,5 +1,7 @@
 import { absBig } from './bigUtils'
 
+const ZERO = BigInt(0)
+
 /**
  * Checks if the given value is a multiple of the specified minimum value.
  * Both the value and the minimum should be represented as strings to maintain precision
@@ -17,9 +19,8 @@ export function isMultipleOfMinimum(value: string | bigint, minimum: string | bi
   // (x != 0 && x % y == 0)
   value = absBig(value)
   minimum = absBig(minimum)
-  const zero = BigInt(0)
 
-  return value !== zero && minimum !== zero && value % minimum === zero && value >= minimum
+  return value !== ZERO && minimum !== ZERO && value % minimum === ZERO && value >= minimum
 }
 
 /**
@@ -40,14 +41,13 @@ export function reduceByRemainder(value: string | bigint, minimum: string | bigi
   // Convert strings to BigInt for calculation
   value = BigInt(value)
   minimum = BigInt(minimum)
-  const zero = BigInt(0)
 
-  if (value === zero || minimum === zero)
-    return zero
+  if (value === ZERO || minimum === ZERO)
+    return ZERO
 
   // Check if value is already a multiple of minimum
   const remainder = value % minimum
-  if (remainder === zero)
+  if (remainder === ZERO)
     return value
 
   return value - remainder

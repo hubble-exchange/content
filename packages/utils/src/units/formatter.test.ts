@@ -52,6 +52,9 @@ test('adds comma to a number or amount string', () => {
   expect(formatWithComma('235')).toMatchInlineSnapshot('"235"')
   expect(formatWithComma('0.235')).toMatchInlineSnapshot('"0.235"')
   expect(formatWithComma('.23512142')).toMatchInlineSnapshot('".23512142"')
+  expect(formatWithComma('< 0.009')).toMatchInlineSnapshot('"< 0.009"')
+  expect(formatWithComma('> 0.001')).toMatchInlineSnapshot('"> 0.001"')
+  expect(formatWithComma('> -0.001')).toMatchInlineSnapshot('"> -0.001"')
 })
 
 test('un-scales the given amount to display value and formatted with preserved decimals', () => {
