@@ -3,6 +3,7 @@ import { scale } from './scale'
 import { unScaleToBase } from './unscale'
 
 const precisionCatalyst = 6 // to avoid total loss of precision if the given decimals are not enough
+const ZERO = BigInt(0)
 
 /**
  * Calculates the unit price based on the number of units and total price.
@@ -13,14 +14,19 @@ const precisionCatalyst = 6 // to avoid total loss of precision if the given dec
 export function calcPrice(
   units: string | bigint, totalPrice: string | bigint, unitDecimals = 18, priceDecimals = 6, noAbs = false,
 ) {
+  units = BigInt(units)
+  totalPrice = BigInt(totalPrice)
+
+  if (units === ZERO || totalPrice === ZERO)
+    return ZERO
+
   if (!noAbs) // due to nature of the exchange, we need to support negative values for units and return +ve unit price
     units = absBig(units)
 
   // to avoid underflow and retain precision
   const priceDecimalsFactor = priceDecimals + priceDecimals + unitDecimals + precisionCatalyst
-
   return unScaleToBase(
-    scale(totalPrice, priceDecimalsFactor) / BigInt(units),
+    scale(totalPrice, priceDecimalsFactor) / units,
     priceDecimalsFactor,
     unitDecimals,
   )
@@ -35,9 +41,14 @@ export function calcPrice(
 export function calcUnits(
   totalPrice: string | bigint, unitPrice: string | bigint, priceDecimals = 6, unitDecimals = 18,
 ) {
+  unitPrice = absBig(unitPrice)
+  totalPrice = absBig(totalPrice)
+  if (unitPrice === ZERO || totalPrice === ZERO)
+    return ZERO
+
   const priceDecimalsFactor = priceDecimals + priceDecimals + unitDecimals + precisionCatalyst
   return unScaleToBase(
-    scale(totalPrice, priceDecimalsFactor) / BigInt(unitPrice),
+    scale(totalPrice, priceDecimalsFactor) / unitPrice,
     priceDecimalsFactor,
     unitDecimals,
   )
@@ -53,12 +64,14 @@ export function calcUnits(
 export function calcTotalPrice(
   units: string | bigint, unitPrice: string | bigint, unitDecimals = 18, priceDecimals = 6, noAbs = false,
 ) {
+  units = BigInt(units)
+  unitPrice = BigInt(unitPrice)
+
+  if (units === ZERO || unitPrice === ZERO)
+    return ZERO
+
   if (!noAbs) // due to nature of the exchange, we need to support negative values for units and return +ve total price
     units = absBig(units)
 
-  return unScaleToBase(
-    BigInt(units) * BigInt(unitPrice),
-    unitDecimals + priceDecimals,
-    priceDecimals,
-  )
+  return unScaleToBase(units * unitPrice, unitDecimals + priceDecimals, priceDecimals)
 }

@@ -31,6 +31,9 @@ test('decimals === 0', () => {
   expect(scale('12301000000000000020000.123', 0)).toMatchInlineSnapshot('12301000000000000020000n')
   expect(scale('12301000000000000020000.5', 0)).toMatchInlineSnapshot('12301000000000000020001n')
   expect(scale('99999999999999999999999.5', 0)).toMatchInlineSnapshot('100000000000000000000000n')
+  expect(scale('', 0)).toMatchInlineSnapshot('0n')
+  expect(scale('0', 0)).toMatchInlineSnapshot('0n')
+  expect(scale('0', 18)).toMatchInlineSnapshot('0n')
 })
 
 test('decimals < fraction length', () => {
