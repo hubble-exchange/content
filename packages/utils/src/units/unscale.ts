@@ -24,8 +24,8 @@ export function unScale(value: bigint | string, decimals: number) {
 /**
  * unScale the given base number to base(bigint) unscale to the given decimals and drop the remaining decimals
  * @example
- * unScaleToBase(69000000000000000000n, 12) // 69000000n
- * unScaleToBase(69n, 0) // 69n
+ * unScaleToBase(69000000000000000000n, 18, 6) // 69000000n
+ * unScaleToBase(69n, 0, 0) // 69n
  */
 export function unScaleToBase(value: bigint | string, decimals: number, newDecimals: number) {
   if (decimals < newDecimals)
