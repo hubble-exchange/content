@@ -1,7 +1,7 @@
 {
   "name": "@hubble-exchange/utils",
   "type": "module",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "Zero dependencies utils for A DEX DApp with perfect precision and performance",
   "license": "ISC",
   "homepage": "https://github.com/hubble-exchange/content#readme",
